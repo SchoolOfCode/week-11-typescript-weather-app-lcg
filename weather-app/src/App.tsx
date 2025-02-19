@@ -14,10 +14,10 @@ function App() {
     const newCity = e.target.city.value;
     setCityName(newCity);
     const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=4aa3ab4f8533e6b8123b5fc3e37a7a9c&units=metric`
+      `https://api.openweathermap.org/data/2.5/weather?q=${newCity}&appid=4aa3ab4f8533e6b8123b5fc3e37a7a9c&units=metric`
     );
-    const json = await response.json();
-    console.log(json);
+    const data = await response.json();
+    console.log(data);
   }
 
   return (
