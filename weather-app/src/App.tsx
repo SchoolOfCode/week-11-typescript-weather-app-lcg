@@ -7,7 +7,7 @@ import { ICityname } from "./types";
 
 function App() {
   const [cityName, setCityName] = useState<string>("Sheffield");
-  const [weatherDetails, setWeatherDetails] = useState({});
+  const [weatherDetails, setWeatherDetails] = useState({main: {temp: 5}, weather: [{description: "placeholder"}]});
 
   async function handleClick(e) {
     e.preventDefault();
@@ -18,12 +18,13 @@ function App() {
     );
     const data = await response.json();
     console.log(data);
+    setWeatherDetails(data);
   }
 
   return (
     <>
       <Header cityName={cityName} handleClick={handleClick} />
-      <Hero cityName={cityName} />
+      <Hero cityName={cityName} weatherTemp={weatherDetails.main.temp} weatherDescription={weatherDetails.weather[0].description} />
       <Footer />
     </>
   );
