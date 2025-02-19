@@ -6,7 +6,7 @@ export default function SearchBar({ handleClick }) {
           City:
         </label>
         <input name="city" id="city"></input>
-        <button type="submit">Add</button>
+        <button type="submit">Search</button>
       </form>
     </>
   );
