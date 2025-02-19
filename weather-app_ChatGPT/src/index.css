@@ -6,62 +6,156 @@ body {
   margin: 0;
   padding: 0;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  flex-direction: column; /* Stack elements vertically */
+  justify-content: flex-start; /* Align everything from the top */
+  align-items: center; /* Center the content horizontally */
+  min-height: 100vh; /* Full viewport height */
   background-color: #f4f4f4;
+  box-sizing: border-box; /* Ensure padding doesn't affect layout */
 }
 
-h1 {
+/* Header styles */
+header {
+  width: 100%;
   text-align: center;
-  font-size: 2em;
+  background-color: white; /* White background for header */
+  color: black;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px; /* Ensure space between header and content */
+  box-sizing: border-box; /* Include padding in the width */
 }
 
+header h1 {
+  margin: 0;
+  font-size: 2.5em;
+}
+
+/* Search Form Styles */
 form {
   display: flex;
   justify-content: center;
   margin-top: 20px;
+  width: 100%;
+  align-items: center; /* Align items horizontally */
 }
 
 input {
-  padding: 8px;
-  font-size: 1em;
+  padding: 10px;
+  font-size: 1.2em;
   border-radius: 4px;
   border: 1px solid #ccc;
+  margin-right: 10px; /* Adding space between input and button */
+  width: 60%; /* Set input to take up a portion of the width */
+  max-width: 500px; /* Limit maximum width */
 }
 
 button {
-  padding: 8px 16px;
-  margin-left: 10px;
-  font-size: 1em;
+  padding: 10px 20px;
+  font-size: 1.2em;
   background-color: #4caf50;
   color: white;
   border: none;
   border-radius: 4px;
+  cursor: pointer;
 }
 
 button:hover {
   background-color: #45a049;
 }
 
-.weather-card {
-  background-color: #8f90f1;
-  padding: 20px;
+/* Add more space between the search bar and the "Forecast Length" */
+label {
+  margin-top: 20px; /* Add space above the label */
+  margin-left: 20px; /* Add space between the search bar and dropdown */
+  font-size: 1.2em;
+}
+
+/* Forecast Length dropdown styles */
+select {
+  padding: 10px;
+  font-size: 1.2em;
+  border-radius: 4px; /* Same border-radius as the search bar */
+  border: 1px solid #ccc;
+  margin-left: 10px; /* Space between label and dropdown */
+  background-color: white; /* White background for consistency */
+  margin-top: 10px; /* Add more space above the dropdown */
+}
+
+/* Styling for city name in header */
+.city-name-container {
+  width: 100%; /* Full width */
+  display: flex;
+  justify-content: center; /* Center the city name */
+  align-items: center;
+  margin-top: 20px; /* Add space between city name and weather cards */
+}
+
+.city-name {
+  font-size: 2em; /* Adjust the font size to make it more prominent */
+  font-weight: bold;
+  color: #333;
+  text-align: center; /* Ensure the text is centered */
+}
+
+/* Container for weather cards */
+.weather-cards-container {
+  display: flex; /* Use flexbox for horizontal alignment */
+  justify-content: center; /* Center the cards horizontally */
+  align-items: flex-start; /* Align items at the top */
+  flex-wrap: wrap; /* Allow cards to wrap if the screen is too narrow */
+  gap: 20px; /* Space between cards */
   margin-top: 20px;
+  max-width: 90%; /* Limit container width for large screens */
+  padding: 10px; /* Add some padding for cleaner alignment */
+}
+
+/* Styling for each weather card */
+.weather-card {
+  background-color: #4caf50;
+  color: white;
+  padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
+  width: 220px; /* Adjust width for a more consistent look */
+  height: 280px; /* Adjust height for better balance */
+  transition: transform 0.2s ease; /* Smooth hover effect */
 }
 
+.weather-card:hover {
+  transform: translateY(-5px); /* Hover effect to raise the card slightly */
+}
+
+.weather-card h2 {
+  margin-bottom: 10px;
+}
+
+.weather-card img {
+  width: 60px; /* Adjust icon size */
+  height: 60px;
+  margin-bottom: 10px;
+}
+
+.weather-card p {
+  margin: 5px 0;
+}
+
+/* Footer styling */
 footer {
   background-color: #333;
   color: white;
   text-align: center;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  position: relative;
-  bottom: 0;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 8px;
   width: 100%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+footer p {
+  margin: 5px 0;
 }
 
 footer a {
@@ -71,4 +165,31 @@ footer a {
 
 footer a:hover {
   text-decoration: underline;
+}
+
+/* Additional adjustments for small screen responsiveness */
+@media (max-width: 600px) {
+  .weather-cards-container {
+    flex-direction: column; /* Stack cards vertically on small screens */
+    align-items: center;
+  }
+
+  .weather-card {
+    width: 100%; /* Make weather cards take full width on small screens */
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 1.8em;
+  }
+
+  input,
+  button {
+    font-size: 0.9em;
+  }
+
+  label,
+  select {
+    font-size: 1em; /* Adjust font size for smaller screens */
+  }
 }

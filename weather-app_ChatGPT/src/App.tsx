@@ -10,6 +10,7 @@ const App: React.FC = () => {
     weatherData: null,
     loading: false,
     error: null,
+    forecastLength: 3, // Default forecast length
   });
 
   // Helper function to check if a string is a postcode
@@ -24,10 +25,10 @@ const App: React.FC = () => {
     let url = "";
     if (isPostcode(query)) {
       // Use the postcode API format: `zip={postcode},{country code}`
-      url = `https://api.openweathermap.org/data/2.5/weather?zip=${query}&appid=4aa3ab4f8533e6b8123b5fc3e37a7a9c&units=metric`;
+      url = `https://api.openweathermap.org/data/2.5/forecast?zip=${query}&appid=4aa3ab4f8533e6b8123b5fc3e37a7a9c&units=metric`;
     } else {
       // Use the city name API format: `q={city name}`
-      url = `https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=4aa3ab4f8533e6b8123b5fc3e37a7a9c&units=metric`;
+      url = `https://api.openweathermap.org/data/2.5/forecast?q=${query}&appid=4aa3ab4f8533e6b8123b5fc3e37a7a9c&units=metric`;
     }
 
     try {
@@ -35,10 +36,11 @@ const App: React.FC = () => {
       const data: WeatherData = await response.json(); // Use WeatherData type
       if (response.ok) {
         setWeatherState({
-          city: query,
+          city: data.city.name, // Use the city name returned from the API
           weatherData: data,
           loading: false,
           error: null,
+          forecastLength: weatherState.forecastLength, // Maintain selected forecast length
         });
       } else {
         setWeatherState({
@@ -46,6 +48,7 @@ const App: React.FC = () => {
           weatherData: null,
           loading: false,
           error: data.message,
+          forecastLength: weatherState.forecastLength, // Maintain selected forecast length
         });
       }
     } catch (error) {
@@ -54,17 +57,28 @@ const App: React.FC = () => {
         weatherData: null,
         loading: false,
         error: "Failed to fetch weather data",
+        forecastLength: weatherState.forecastLength, // Maintain selected forecast length
       });
     }
   };
 
+  // Handler to update forecast length
+  const handleForecastLengthChange = (length: number) => {
+    setWeatherState((prevState) => ({ ...prevState, forecastLength: length }));
+  };
+
   return (
     <div>
-      <Header onSearch={handleSearch} />
+      <Header
+        onSearch={handleSearch}
+        onForecastLengthChange={handleForecastLengthChange}
+      />
       <Main
         weatherData={weatherState.weatherData}
         loading={weatherState.loading}
         error={weatherState.error}
+        forecastLength={weatherState.forecastLength} // Pass forecast length
+        city={weatherState.city} // Pass city to Main for display
       />
       <Footer />
     </div>

@@ -4,10 +4,11 @@ const Footer: React.FC = () => {
   return (
     <footer>
       <p>Weather App &copy; 2025</p>
+      <p>Created by LCG, using React in a hurry.</p>
       <p>
-        Created by [Your Name]. View on{" "}
+        View on{" "}
         <a
-          href="https://github.com/your-github-repo"
+          href="https://github.com/SchoolOfCode/week-11-typescript-weather-app-lcg"
           target="_blank"
           rel="noopener noreferrer"
         >
